@@ -63,3 +63,16 @@ created_at: Timestamp for creation.
 i feel like we might need multiple tables beacuse the one that she explained in class looked complex 
 so when u create lmk ill make edits in mine
 
+
+Location table
+```
+CREATE TABLE location (
+    building VARCHAR(100) NOT NULL,
+    room_no VARCHAR(20) NOT NULL,
+    floor INT,
+
+    PRIMARY KEY (building, room_no)
+);
+```
+
+
