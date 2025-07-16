@@ -1,4 +1,4 @@
-Student Table
+--Student Table
 
 CREATE TABLE students (
     roll_number VARCHAR(20) PRIMARY KEY, -- Format: CB.SC.U4AIE23225
@@ -21,7 +21,8 @@ CREATE TABLE students (
     INDEX idx_admission_year (admission_year),
     INDEX idx_active (is_active)
 );
-Faculty Table
+
+--Faculty Table
 
 CREATE TABLE faculty (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,4 +44,32 @@ CREATE TABLE faculty (
     INDEX idx_email (email),
     INDEX idx_faculty_role (faculty_role),
     INDEX idx_active (is_active)
-);-- first commit
+);
+
+--Class Table
+
+CREATE TABLE classes (
+    class_id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) NOT NULL, 
+    start_year INT NOT NULL,
+    semester INT NOT NULL,
+    section ENUM('A', 'B', 'C', 'D', 'E', 'F') NOT NULL, 
+    advisor_id INT NULL, 
+    cr_student_id INT NULL, 
+    building VARCHAR(100) NOT NULL,
+    room_no VARCHAR(20) NOT NULL,
+    current_strength INT NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+
+    FOREIGN KEY (advisor_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL,
+    FOREIGN KEY (cr_student_id) REFERENCES students(student_id) ON DELETE SET NULL,
+    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no) ON DELETE RESTRICT,
+
+    INDEX idx_start_year (start_year),
+    INDEX idx_semester (semester),
+    INDEX idx_section (section),
+    INDEX idx_advisor (advisor_id),
+    INDEX idx_cr_student (cr_student_id),
+    INDEX idx_building_room (building, room_no),
+    INDEX idx_active (is_active)
+);
