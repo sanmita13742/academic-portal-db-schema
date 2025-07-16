@@ -127,3 +127,26 @@ CREATE TABLE students (
     INDEX idx_active (is_active)
 );
 ```
+Faculty Table
+```
+CREATE TABLE faculty (
+    faculty_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL, -- Using bcrypt hash
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    faculty_role ENUM('professor', 'associate_professor', 'assistant_professor', 'advisor', 'hod', 'dean', 'admin') NOT NULL,
+    specialization VARCHAR(100),
+    qualifications VARCHAR(200),
+    experience_years INT DEFAULT 0,
+    admission_date DATE,
+    is_active BOOLEAN DEFAULT TRUE,
+    email_verified BOOLEAN DEFAULT FALSE,
+    last_login DATETIME NULL,
+
+    INDEX idx_employee_id (employee_id),
+    INDEX idx_email (email),
+    INDEX idx_faculty_role (faculty_role),
+    INDEX idx_active (is_active)
+);
