@@ -58,8 +58,13 @@ CREATE TABLE courses (
     course_name VARCHAR(255) NOT NULL,
     course_code VARCHAR(50) NOT NULL UNIQUE,
     description TEXT,
-    class ENUM('AIE-A', 'AIE-B', 'AIE-C', 'AIE-D') NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    class_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (class_id) REFERENCES classes(class_id) ON DELETE CASCADE,
+
+    INDEX idx_class_id (class_id),
+    INDEX idx_course_code (course_code)
 );
 ```
 
