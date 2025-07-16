@@ -16,3 +16,13 @@ CREATE TABLE timetables (
     FOREIGN KEY (teacher_id) REFERENCES users(user_id)
 );
 
+--timetable_metadata table
+CREATE TABLE timetable_metadata (
+    metadata_id INT AUTO_INCREMENT PRIMARY KEY,
+    timetable_id INT NOT NULL,
+    export_format ENUM('PDF', 'image') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Foreign Key Constraint
+    FOREIGN KEY (timetable_id) REFERENCES timetables(timetable_id)
+);
