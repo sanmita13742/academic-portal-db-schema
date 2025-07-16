@@ -115,12 +115,9 @@ CREATE TABLE students (
     class_id INT NOT NULL,
     admission_year INT NOT NULL,
     cgpa DECIMAL(3,2) DEFAULT 0.00,
-    status ENUM('active', 'inactive', 'graduated', 'dropped') DEFAULT 'active',
     is_active BOOLEAN DEFAULT TRUE,
     email_verified BOOLEAN DEFAULT FALSE,
     last_login DATETIME NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (class_id) REFERENCES classes(class_id) ON DELETE RESTRICT,
 
