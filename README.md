@@ -1,6 +1,7 @@
 # academic-portal-db-schema
 AIE Academic Platform
 This repository contains the backend schema design for an academic platform supporting Authentication, Timetable, Amrita Calendar, Open Projects, and Course Dump modules for Amrita Institute of Engineering (AIE) classes (AIE-A, AIE-B, AIE-C, AIE-D). The project is developed collaboratively by a four-member team, with each member responsible for specific schema files and contributing to shared documentation.
+```
 Repository Structure
 ├── docs/
 │   ├── auth-instructions.md        # Instructions for Authentication Module schema
@@ -17,7 +18,7 @@ Repository Structure
 │   ├── projects.sql               # SQL schema for Open Projects Platform
 │   └── timetable.sql              # SQL schema for Timetable Module
 └── README.md                      # This file
-
+```
 Project Overview
 The platform supports the following modules, each with specific features and enhancements as outlined in the respective instruction files under docs/:
 
