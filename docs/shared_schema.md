@@ -74,5 +74,27 @@ CREATE TABLE location (
     PRIMARY KEY (building, room_no)
 );
 ```
-
+Class Table 
+```
+CREATE TABLE classes (
+    class_id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(50) NOT NULL, 
+    admission_year INT NOT NULL,
+    semester INT NOT NULL, 
+    section ENUM('A', 'B', 'C', 'D', 'E', 'F') NOT NULL, 
+    advisor_id INT NULL, 
+    cr_student_id INT NULL, 
+    location_id INT NOT NULL, 
+    current_strength INT NOT NULL, 
+    is_active BOOLEAN DEFAULT TRUE,
+    
+    INDEX idx_start_year (start_year),
+    INDEX idx_semester (semester),
+    INDEX idx_section (section),
+    INDEX idx_advisor (advisor_id),
+    INDEX idx_cr_student (cr_student_id),
+    INDEX idx_location (location_id),
+    INDEX idx_active (is_active)
+);
+```
 
