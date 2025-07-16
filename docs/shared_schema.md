@@ -79,21 +79,26 @@ Class Table
 CREATE TABLE classes (
     class_id INT AUTO_INCREMENT PRIMARY KEY,
     class_name VARCHAR(50) NOT NULL, 
-    admission_year INT NOT NULL,
-    semester INT NOT NULL, 
+    start_year INT NOT NULL,
+    semester INT NOT NULL,
     section ENUM('A', 'B', 'C', 'D', 'E', 'F') NOT NULL, 
     advisor_id INT NULL, 
     cr_student_id INT NULL, 
-    location_id INT NOT NULL, 
-    current_strength INT NOT NULL, 
+    building VARCHAR(100) NOT NULL,
+    room_no VARCHAR(20) NOT NULL,
+    current_strength INT NOT NULL,
     is_active BOOLEAN DEFAULT TRUE,
-    
+
+    FOREIGN KEY (advisor_id) REFERENCES faculty(faculty_id) ON DELETE SET NULL,
+    FOREIGN KEY (cr_student_id) REFERENCES students(student_id) ON DELETE SET NULL,
+    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no) ON DELETE RESTRICT,
+
     INDEX idx_start_year (start_year),
     INDEX idx_semester (semester),
     INDEX idx_section (section),
     INDEX idx_advisor (advisor_id),
     INDEX idx_cr_student (cr_student_id),
-    INDEX idx_location (location_id),
+    INDEX idx_building_room (building, room_no),
     INDEX idx_active (is_active)
 );
 ```
