@@ -103,3 +103,30 @@ CREATE TABLE classes (
 );
 ```
 
+Student Table 
+```
+CREATE TABLE students (
+    roll_number VARCHAR(20) PRIMARY KEY, -- Format: CB.SC.U4AIE23225
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL, -- Using bcrypt hash (optimal for security)
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    class_id INT NOT NULL,
+    admission_year INT NOT NULL,
+    cgpa DECIMAL(3,2) DEFAULT 0.00,
+    status ENUM('active', 'inactive', 'graduated', 'dropped') DEFAULT 'active',
+    is_active BOOLEAN DEFAULT TRUE,
+    email_verified BOOLEAN DEFAULT FALSE,
+    last_login DATETIME NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (class_id) REFERENCES classes(class_id) ON DELETE RESTRICT,
+
+    INDEX idx_email (email),
+    INDEX idx_class (class_id),
+    INDEX idx_admission_year (admission_year),
+    INDEX idx_active (is_active)
+);
+```
