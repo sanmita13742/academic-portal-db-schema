@@ -2,7 +2,6 @@ CREATE TABLE location (
     building VARCHAR(100) NOT NULL,
     room_no VARCHAR(20) NOT NULL,
     floor INT,
-
     PRIMARY KEY (building, room_no)
 );
 
@@ -13,9 +12,9 @@ CREATE TABLE courses (
     description TEXT,
     class_id INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
+    
     FOREIGN KEY (class_id) REFERENCES classes(class_id) ON DELETE CASCADE,
-
+    
     INDEX idx_class_id (class_id),
     INDEX idx_course_code (course_code)
 );
@@ -23,7 +22,8 @@ CREATE TABLE courses (
 CREATE TABLE course_location_assignments (
     assignment_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
-    location_id INT NOT NULL,
+    building VARCHAR(100) NOT NULL,
+    room_no VARCHAR(20) NOT NULL,
     effective_from DATETIME NOT NULL,
     effective_to DATETIME DEFAULT NULL,
     notification_flag BOOLEAN DEFAULT TRUE,
@@ -31,10 +31,9 @@ CREATE TABLE course_location_assignments (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (course_id) REFERENCES courses(course_id),
-    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no)
+    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no),
 
     INDEX idx_course_id (course_id),
-    INDEX idx_location_id (location_id),
     INDEX idx_effective_from (effective_from)
 );
 
@@ -96,4 +95,3 @@ CREATE TABLE material_comments (
     INDEX idx_user_student_roll_number (user_student_roll_number),
     INDEX idx_created_at (created_at)
 );
-
