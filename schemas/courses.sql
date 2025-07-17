@@ -11,12 +11,16 @@ CREATE TABLE courses (
     course_code VARCHAR(50) NOT NULL UNIQUE,
     description TEXT,
     class_id INT NOT NULL,
+    building VARCHAR(100) NOT NULL,
+    room_no VARCHAR(20) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
+
     FOREIGN KEY (class_id) REFERENCES classes(class_id) ON DELETE CASCADE,
-    
+    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no),
+
     INDEX idx_class_id (class_id),
-    INDEX idx_course_code (course_code)
+    INDEX idx_course_code (course_code),
+    INDEX idx_location (building, room_no)
 );
 
 CREATE TABLE course_location_assignments (
