@@ -6,14 +6,14 @@ CREATE TABLE timetables (
     end_time TIME NOT NULL,
     day ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') NOT NULL,
     room VARCHAR(50),
-    teacher_id INT NOT NULL,
+    faculty_id INT NOT NULL,
     course_id INT NOT NULL,
-    class_sec INT NOT NULL,
+    section INT NOT NULL,
 
     -- Foreign Key Constraints
     FOREIGN KEY (course_id) REFERENCES courses(course_id),
-    FOREIGN KEY (class_sec) REFERENCES class(class_id),
-    FOREIGN KEY (teacher_id) REFERENCES users(user_id)
+    FOREIGN KEY (section) REFERENCES classes(class_id),
+    FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id)
 );
 
 --timetable_metadata table
