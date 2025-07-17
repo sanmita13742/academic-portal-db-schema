@@ -1,25 +1,4 @@
--- Drop tables if they exist (for recreation)
-DROP TABLE IF EXISTS sessions;
-DROP TABLE IF EXISTS password_resets;
-DROP TABLE IF EXISTS registration_requests;
-DROP TABLE IF EXISTS students;
-DROP TABLE IF EXISTS faculty;
-DROP TABLE IF EXISTS classes;
-DROP TABLE IF EXISTS location;
 
--- ================================
--- LOCATION TABLE
--- ================================
-CREATE TABLE location (
-    building VARCHAR(100) NOT NULL,
-    room_no VARCHAR(20) NOT NULL,
-    floor INT,
-    PRIMARY KEY (building, room_no)
-);
-
--- ================================
--- FACULTY TABLE
--- ================================
 CREATE TABLE faculty (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -41,9 +20,6 @@ CREATE TABLE faculty (
     INDEX idx_active (is_active)
 );
 
--- ================================
--- STUDENTS TABLE
--- ================================
 CREATE TABLE students (
     roll_number VARCHAR(20) PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -66,9 +42,7 @@ CREATE TABLE students (
     INDEX idx_active (is_active)
 );
 
--- ================================
--- CLASSES TABLE
--- ================================
+
 CREATE TABLE classes (
     class_id INT AUTO_INCREMENT PRIMARY KEY,
     class_name VARCHAR(50) NOT NULL,
@@ -95,9 +69,6 @@ CREATE TABLE classes (
     INDEX idx_active (is_active)
 );
 
--- ================================
--- SESSIONS TABLE
--- ================================
 CREATE TABLE sessions (
     session_id INT AUTO_INCREMENT PRIMARY KEY,
     user_type ENUM('student', 'faculty') NOT NULL,
@@ -117,9 +88,7 @@ CREATE TABLE sessions (
     INDEX idx_active (is_active)
 );
 
--- ================================
--- PASSWORD RESETS TABLE
--- ================================
+
 CREATE TABLE password_resets (
     reset_id INT AUTO_INCREMENT PRIMARY KEY,
     user_type ENUM('student', 'faculty') NOT NULL,
@@ -137,9 +106,7 @@ CREATE TABLE password_resets (
     INDEX idx_is_used (is_used)
 );
 
--- ================================
--- REGISTRATION REQUESTS TABLE
--- ================================
+
 CREATE TABLE registration_requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
@@ -168,27 +135,7 @@ CREATE TABLE registration_requests (
     INDEX idx_user_type (user_type),
     INDEX idx_roll_number (roll_number)
 );
--- ===========================================
--- 📌 NOTE: Unified Authentication Design
--- ===========================================
 
--- This schema uses a unified authentication model for both students and faculty.
--- The tables: `sessions`, `password_resets`, and `registration_requests` 
--- are shared between both user types using:
-
---     user_type ENUM('student', 'faculty')
---     user_id   VARCHAR(255)
-
--- This approach allows:
--- Centralized session and authentication logic
--- Easier extension to future user types (e.g., alumni, admins)
--- Minimal table duplication
--- All auth logic lives in one set of tables (sessions, password_resets, etc.).
--- Scalable: can support more user types (e.g., admin, alumni) with ease.
--- Cleaner for front-end/backend to work with one token/session system.
-
--- Since student identifiers (`roll_number`) are VARCHAR and faculty identifiers (`faculty_id`) are INT,
--- the `user_id` is stored as VARCHAR(255) without strict foreign key enforcement.
 -- 📌Application logic must validate that user_id refers to the correct table based on user_type.
 
 -- This is a scalable and clean pattern used in real-world systems 
