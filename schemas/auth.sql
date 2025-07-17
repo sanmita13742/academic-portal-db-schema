@@ -135,8 +135,3 @@ CREATE TABLE registration_requests (
     INDEX idx_user_type (user_type),
     INDEX idx_roll_number (roll_number)
 );
-
--- 📌Application logic must validate that user_id refers to the correct table based on user_type.
-
--- This is a scalable and clean pattern used in real-world systems 
--- for unified user management across roles.
