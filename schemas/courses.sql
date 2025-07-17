@@ -1,9 +1,9 @@
 CREATE TABLE location (
-    location_id INT AUTO_INCREMENT PRIMARY KEY,
     building VARCHAR(100) NOT NULL,
     room_no VARCHAR(20) NOT NULL,
     floor INT,
-    UNIQUE(building, room_no)
+
+    PRIMARY KEY (building, room_no)
 );
 
 CREATE TABLE courses (
@@ -31,7 +31,7 @@ CREATE TABLE course_location_assignments (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (course_id) REFERENCES courses(course_id),
-    FOREIGN KEY (location_id) REFERENCES location(location_id),
+    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no)
 
     INDEX idx_course_id (course_id),
     INDEX idx_location_id (location_id),
