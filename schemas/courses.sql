@@ -23,24 +23,6 @@ CREATE TABLE courses (
     INDEX idx_location (building, room_no)
 );
 
-CREATE TABLE course_location_assignments (
-    assignment_id INT AUTO_INCREMENT PRIMARY KEY,
-    course_id INT NOT NULL,
-    building VARCHAR(100) NOT NULL,
-    room_no VARCHAR(20) NOT NULL,
-    effective_from DATETIME NOT NULL,
-    effective_to DATETIME DEFAULT NULL,
-    notification_flag BOOLEAN DEFAULT TRUE,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (course_id) REFERENCES courses(course_id),
-    FOREIGN KEY (building, room_no) REFERENCES location(building, room_no),
-
-    INDEX idx_course_id (course_id),
-    INDEX idx_effective_from (effective_from)
-);
-
 CREATE TABLE course_materials (
     material_id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
