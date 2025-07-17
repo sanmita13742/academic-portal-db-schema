@@ -1,8 +1,9 @@
 CREATE TABLE location (
+    location_id INT AUTO_INCREMENT PRIMARY KEY,
     building VARCHAR(100) NOT NULL,
     room_no VARCHAR(20) NOT NULL,
     floor INT,
-    PRIMARY KEY (building, room_no)
+    UNIQUE(building, room_no)
 );
 
 CREATE TABLE faculty (
