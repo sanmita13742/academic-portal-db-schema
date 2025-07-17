@@ -72,7 +72,7 @@ CREATE TABLE classes (
 CREATE TABLE sessions (
     session_id INT AUTO_INCREMENT PRIMARY KEY,
     user_type ENUM('student', 'faculty') NOT NULL,
-    user_id VARCHAR(255) NOT NULL, -- roll_number or faculty_id
+    user_id VARCHAR(255) NOT NULL, 
     token TEXT NOT NULL,
     token_type ENUM('access', 'refresh') DEFAULT 'access',
     device_info VARCHAR(255),
@@ -115,11 +115,9 @@ CREATE TABLE registration_requests (
     phone VARCHAR(20),
     user_type ENUM('student', 'faculty') NOT NULL,
 
-    -- Student-specific
     roll_number VARCHAR(20),
     admission_year INT,
 
-    -- Faculty-specific
     faculty_role ENUM('professor', 'associate_professor', 'assistant_professor', 'advisor', 'hod', 'dean', 'admin'),
     qualifications VARCHAR(200),
 
